@@ -29,7 +29,8 @@ Pkgadd::Pkgadd()
 	: Pkgdbh("pkgadd"),
 	m_runPrePost(true),
 	m_upgrade(false),
-	m_force(false)
+	m_force(false),
+	m_silent(false)
 {
 	// Checking the rules
 	readRulesFile();
@@ -39,7 +40,8 @@ Pkgadd::Pkgadd(const std::string& commandName)
 	: Pkgdbh(commandName),
 	m_runPrePost(true),
 	m_upgrade(false),
-	m_force(false)
+	m_force(false),
+	m_silent(false)
 {
 	// Checking the rules
 	readRulesFile();
@@ -64,6 +66,8 @@ void Pkgadd::parseArguments(int argc, char** argv)
 			m_upgrade = true;
 		} else if (option == "-f" || option == "--force") {
 			m_force = true;
+		} else if (option == "-s" || option == "--silent") {
+			m_silent = true;
 		} else if (option[0] == '-' || !m_packageArchiveName.empty()) {
 			m_actualError = INVALID_OPTION;
 			treatErrors(option);
@@ -104,7 +108,7 @@ void Pkgadd::run()
 	getListOfPackageNames(m_root);
 
 	// Retrieving info about all the packages
-	buildCompleteDatabase(false);
+	buildCompleteDatabase(!m_silent);
 
 	// Reading the archiving to find a list of files
 	pair<string, pkginfo_t> package = openArchivePackage(m_packageArchiveName);

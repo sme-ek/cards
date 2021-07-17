@@ -60,6 +60,7 @@ protected:
 	bool m_runPrePost;
 	bool m_upgrade;
 	bool m_force;
+	bool m_silent;
 private:
 	std::set<std::string> getKeepFileList(const std::set<std::string>& files,
 		const std::vector<rule_t>& rules);

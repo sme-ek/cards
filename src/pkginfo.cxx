@@ -191,7 +191,7 @@ void Pkginfo::run()
 			}
 		} else if (m_list_mode) {
 			// List package or file contents
-//			buildCompleteDatabase(false);
+//			buildCompleteDatabase(true);
 			buildDatabase(true,false,false,false,"");
 			if ( (! checkPackageNameExist(m_arg)) &&
 					(! checkPackageNameExist(m_arg)) ) {
@@ -209,7 +209,7 @@ void Pkginfo::run()
 		} else if (m_runtimedependencies_mode) {
 			/* 	Get runtimedependencies of the file found in the directory path
 				get the list of installed packages silently */
-			buildCompleteDatabase(true);
+			buildCompleteDatabase(false);
 			int Result;
 			set<string>filenameList;
 			Result = findRecursiveFile (filenameList, m_arg.c_str(), WS_DEFAULT);
@@ -253,7 +253,7 @@ void Pkginfo::run()
 			}	
 		} else if (m_libraries_mode + m_runtime_mode > 0) {
 			// get the list of installed packages silently
-			buildCompleteDatabase(true);
+			buildCompleteDatabase(false);
 			set<string> librariesList;
 			int Result = -1;
 			if (checkPackageNameExist(m_arg)) {
@@ -316,7 +316,7 @@ void Pkginfo::run()
 			}
 		} else if (m_details_mode) {
 			// get all details of a package
-			buildCompleteDatabase(false);
+			buildCompleteDatabase(true);
 			if (checkPackageNameExist(m_arg)) {
 				string arg = m_listOfAlias[m_arg];
 				cout << _("Name           : ") << arg << endl
@@ -363,7 +363,7 @@ void Pkginfo::run()
 			}
 		} else if (m_owner_mode) {
 			// List owner(s) of file or directory
-			buildCompleteDatabase(false);
+			buildCompleteDatabase(true);
 			regex_t preg;
 			if (regcomp(&preg, m_arg.c_str(), REG_EXTENDED | REG_NOSUB)) {
 				m_actualError = CANNOT_COMPILE_REGULAR_EXPRESSION;

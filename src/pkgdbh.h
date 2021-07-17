@@ -218,7 +218,7 @@ protected:
 	void buildSimpleDatabase();
 	void buildSimpleDependenciesDatabase();
 
-	void buildCompleteDatabase(const bool& silent);
+	void buildCompleteDatabase(const bool& progress);
 	void buildDatabase(const bool& progress,
 	const bool& simple,
 	const bool& all,

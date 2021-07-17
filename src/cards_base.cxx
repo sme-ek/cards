@@ -111,7 +111,7 @@ void Cards_base::run(int argc, char** argv)
 			getListOfPackageNames(m_root);
 
 			// Retrieve info about all the packages
-			buildCompleteDatabase(false);
+			buildCompleteDatabase(true);
 			// Lock the Database, any interruption forbidden
 			Db_lock lock(m_root, true);
 

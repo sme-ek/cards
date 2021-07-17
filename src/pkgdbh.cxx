@@ -569,11 +569,11 @@ void Pkgdbh::buildSimpleDatabase()
  /**
  * Populate the database with all details infos
  */
-void Pkgdbh::buildCompleteDatabase(const bool& silent)
+void Pkgdbh::buildCompleteDatabase(const bool& progress)
 {
 	cleanupMetaFiles(m_root);
 	if (m_DB_Empty) {
-		if (!silent) {
+		if (progress) {
 			m_actualAction = DB_OPEN_START;
 			progressInfo();
 		}
@@ -584,7 +584,7 @@ void Pkgdbh::buildCompleteDatabase(const bool& silent)
 			getListOfPackageNames (m_root);
 
 		for (auto i : m_packageNamesList) {
-			if (!silent) {
+			if (progress) {
 				m_actualAction = DB_OPEN_RUN;
 				progressInfo();
 			}
@@ -703,7 +703,7 @@ void Pkgdbh::buildCompleteDatabase(const bool& silent)
 		cerr << m_listOfInstPackages.size()
 		<< " packages found in database " << endl;
 #endif
-		if (!silent)
+		if (progress)
 		{
 			m_actualAction = DB_OPEN_END;
 			progressInfo();
